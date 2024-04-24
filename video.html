@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DEN TAVSE TRUSSEL</title>
+
+    <!-- Link til ekstern CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Link til JavaScript -->
+    <script src="script-video.js" defer></script>
+
+    <!-- Link til Google Font "Montserrat" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Links til Font Awesome ikoner -->
+    <script src="https://kit.fontawesome.com/08fa4f7fbc.js" crossorigin="anonymous"></script>
+
+</head>
+    <body>
+        <!-- Overskrift -->
+        <h2>Den tavse trussel <br>- en blodprop i hjertet</h2>
+        <a href="start.html" id="hjem-knap"><i class="fa-solid fa-arrow-left"></i></a>
+
+        <!-- Video -->
+            <!-- Video wrapper er en overordnet container bruges ved en eller flere videoer for at stukturere. Giver mulighed for lettere at styre indholdet  -->
+        <div class="video-wrapper">
+            
+            <div class="video-container">
+                <p>Se Heines personlige beretning om den dag blodproppen ramte</p>
+                <video id="heine-video">
+                    <source src="images/heine.mp4" type="video/mp4">
+                </video>
+                <button class="play-button" id="play-heine-video">Play</button>
+            </div>
+            <button class="luk-fullscreen-button" id="luk-fullscreen-heine">X</button>
+
+            <progress class="video-progress-bar" id="progress-bar-heine" max="100" value="0"></progress>
+
+            <div class="video-container">
+                <p>Kom med overlæge Steen Dalby fra AUH på operationsstuen</p>
+                <video id="operation-video">
+                    <source src="images/Operation.mp4" type="video/mp4">
+                </video>
+                <button class="play-button" id="play-operation-video">Play</button>
+            </div>
+            <button class="luk-fullscreen-button" id="luk-fullscreen-operation">X</button>
+            
+            <progress class="video-progress-bar" id="progress-bar-operation" max="100" value="0"></progress>
+        </div>
+    </body>
+</html>

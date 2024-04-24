@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DEN VARIERENDE HJERTERYTME</title>
+
+    <!-- Link til ekstern CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Link til JavaScript -->
+    <script src="script.js" defer></script>
+
+    <!-- Link til Google Font "Montserrat" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Links til Font Awesome ikoner -->
+    <script src="https://kit.fontawesome.com/08fa4f7fbc.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <h2>Den varierende hjerterytme</h2>
+
+    <a href="start.html" id="hjem-knap"><i class="fa-solid fa-arrow-left"></i></a>
+
+    <div class="slideshow-container height">
+        <div class="mySlides fade">
+            <p id="intro_text">Udforsk hvordan hjertets rytme forandres gennem livets forskellige stadier</p>
+            <div class="hjerte_wrapper" id="aldre">
+                <div class="column">
+                    <video id="puls-video-2" loop preload="auto" src="images/Hjertebeat.mp4" type="video/mp4" width="442" height="100%"></video>
+                    <p id="slag-pr-minut-2"></p><!-- Paragraf udfyldes vha JavaScript, når brugeren trykker på en af knapperne -->
+                    <button class="hjerterytme-btn" id="elite-btn">Elitesportsudøver <i class="fa-solid fa-person-running"></i></button>
+                </div>
+        
+                <div class="column">
+                    <button class="hjerterytme-btn" id="spadbarn-btn">Spædbarn <i class="fa-solid fa-baby"></i></button>
+                    <button class="hjerterytme-btn" id="born-btn">Børn <i class="fa-solid fa-child"></i></button>
+                    <button class="hjerterytme-btn" id="voksen-btn">Voksen <i class="fa-solid fa-person"></i></button>
+                    <button class="hjerterytme-btn" id="senior-btn">Senior <i class="fa-solid fa-person-cane"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mySlides fade">
+            <p id="intro_text">Udforsk hvordan hjertets rytme kan ændre sig i forskellige situationer</p>
+            <div class="hjerte_wrapper" id="situationer">
+                <!-- Indhold til side med pulsen i forskellige situationer -->
+                <div class="column">
+                    <video id="puls-video" loop preload="auto" src="images/Hjertebeat.mp4" type="video/mp4" width="442" height="100%"></video>
+                    <p id="slag-pr-minut"></p> <!-- Paragraf udfyldes vha JavaScript, når brugeren trykker på en af knapperne -->
+                    <button class="hjerterytme-btn" id="koffein-btn">Koffein <i class="fa-solid fa-mug-hot"></i></button>
+                </div>
+        
+                <div class="column">
+                    <button class="hjerterytme-btn" id="stress-btn">Stress <i class="fa-solid fa-clock"></i></button>
+                    <button class="hjerterytme-btn" id="sovn-btn"> Søvn <i class="fa-solid fa-moon"></i></button>
+                    <button class="hjerterytme-btn" id="motion-btn">Motion <i class="fa-solid fa-dumbbell"></i></button>
+                    <button class="hjerterytme-btn" id="hvile-btn">Hvile <i class="fa-solid fa-couch"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+        
+        </div>
+        <br>
+        
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+        </div>
+</body>
+</html>

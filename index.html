@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>START SKÆRM</title>
+
+    <!-- Link til ekstern CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Link til JavaScript -->
+    <script src="script.js" defer></script>
+
+    <!-- Link til Google Font "Montserrat" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Links til Font Awesome ikoner -->
+    <script src="https://kit.fontawesome.com/08fa4f7fbc.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="start-side-wrapper">
+        <div id="top-border"></div>
+            <div id="left-border">
+                <a href="hjerterytme.html"><button id="left-top-btn">Den<br>varierende<br>hjerterytme</button></a>
+                <a href="video.html"><button id="left-bottom-btn">Den tavse<br>trussel</button></a>
+            </div>
+        
+            <div id="hjerte-model">
+                <iframe title="Realistic Human Heart" width="100%" height="800" src="https://sketchfab.com/models/3f8072336ce94d18b3d0d055a1ece089/embed?autostart=1&camera=0"></iframe>
+                <img id="swipe-gesture" src="images/gesture.png" alt=" Drej, træk og zoom for at udforske 3D modellen">
+            </div>
+
+            <div id="right-border">
+                <a href="infografik.html"><button id="right-top-btn">Hjertets<br>hemmeligheder</button></a>
+                <a href="quiz.html"><button id="right-bottom-btn">Test<br>din viden</button></a>
+            </div>
+        <div id="bottom-border"></div>
+    </div>
+
+    <!-- Mørkt overlay, som bliver fjernet vha JS, når brugeren interagerer med skærmen -->
+    <div id="dark-overlay"></div>
+    <h1 id="main-title">Udforsk det<br>menneskelige hjerte</h1> <!-- Titel som bliver mindre og flyttes op i toppen vha JavaScript, når brugeren interagerer med skærmen -->
+        <p id="guide-tekst">Tryk på skærmen</p>
+</body>
+</html>
+
+

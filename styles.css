@@ -1,0 +1,599 @@
+/* Keyframes til animation brugt på pulserende elementer: h1 + quiz knap */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Keyframes til animation brugt på swipe-gesture. Animationen sættes igang med JavaScript */
+@keyframes swipe {
+    0% {
+        left: 48%;
+    }
+
+    50% {
+        left: 52%; 
+    }
+
+    100% {
+        left: 48%;
+    }
+}
+
+/* Keyframes til animation brugt til at få de forskellige sider på slideshow til at fade ind */
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+/* Keyframes til animation brugt til forloop, så elementerne fader ind en ad gangen */
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+body {
+    background: radial-gradient(#393939, black);
+    background-color: #393939; /* I tilfælde, hvor browseren ikke understøtter gradient */
+}
+
+
+/* 3D model af hjerte */
+#hjerte-model {
+    display: block;
+    width: 100%;
+}
+
+#left-border {
+    width: 30%;
+    height: 100%;
+    background-color: #2B2B2B; /* Vises i browsere som ikke understøtter gradient */
+    background-image: linear-gradient(to left, #5b5b5b , black);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#right-border {
+    width: 30%;
+    height: 100%;
+    background-color: #2B2B2B; /* Vises i browsere som ikke understøtter gradient */
+    background-image: linear-gradient(to right, #5b5b5b , black);
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#top-border {
+    width: 40%;
+    height: 3%;
+    background-color: #434343; /* Vises i browsere som ikke understøtter gradient */
+    background-image: linear-gradient(#393939, #434343);
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 0;
+
+    z-index: 2;
+}
+
+#bottom-border {
+    width: 40%;
+    height: 3%;
+    background-color: #434343; /* Vises i browsere som ikke understøtter gradient */
+    background-image: linear-gradient(#393939, #434343);
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 0px;
+
+    z-index: 2;
+}
+
+.start-side-wrapper button, .quiz-wrapper button {
+    height: 220px;
+    width: 220px;
+    border-radius: 50%;
+    border: 8px #52C0A4 solid;
+    position: fixed;
+    background-color: transparent;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    line-height: 150%; 
+    color: white;
+    text-transform: uppercase;
+
+    z-index: 3;
+}
+
+
+#left-top-btn {
+    top: 100px;
+    left: 100px;
+}
+
+#left-bottom-btn {
+    bottom: 100px;
+    left: 100px;
+}
+
+#right-top-btn {
+    top: 100px;
+    right: 100px;
+}
+
+#right-bottom-btn {
+    bottom: 100px;
+    right: 100px;
+}
+
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 5em; 
+    background: -webkit-linear-gradient(#80EFD1, #29957B); /* Vi laver en linear gradient, som går fra lys grøn til mørk grøn top mod bund */
+    background-clip: text; /* Gradienten vil kun blive vist inde i bogstaverne */
+    -webkit-text-fill-color: transparent; /* Vi gør selve teksten transparent, så gradient-baggrunden kun bliver synlig i bogstaverne */
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: font-size 1.5s ease-out, top 1.5s ease-out;
+    animation: pulse 1s infinite;
+
+    z-index: 12;
+}
+
+#guide-tekst {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 1em;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 60%;
+
+    z-index: 12;
+}
+
+#dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 89%;
+    width: 100%;
+    height: 815px;
+    transition: opacity 1.5s ease; /* Overlayet forsvinder mere glidende med en */
+
+    z-index: 10;
+}
+
+#swipe-gesture {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: auto;
+    opacity: 0; /* Opacity sættes op med JavaScript, når ikonet skal vises */
+
+    z-index: 8; 
+}
+
+/*----------------------------------------
+-                                        -
+-             SLIDE FUNKTION             -
+-                                        -
+-----------------------------------------*/
+
+
+.mySlides {
+    display: none
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1300px;
+    position: relative;
+    margin: auto;
+}
+
+.height {
+    height: 80vh;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    z-index: 50;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #2B2B2B;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active {
+    background-color: white;
+}
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.hjerte-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* STYLE FOR PIL PÅ SIDE MED SLIDER */
+.venstrePil, .hoejrePil {
+    color: white;
+    font-size: 3em;
+    border: none;
+    position: static;
+    width: 50px;
+    height: 50px;
+}
+
+#situationer,
+#aldre {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* Tilpas størrelsen på billedet */
+#situationer video, #aldre video {
+    width: 442px; 
+    border: 8px #52C0A4 solid;
+    border-radius: 70px;
+}
+
+/* Sørger for at knapperne sidder ovenpå hinanden */
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.hjerterytme-btn {
+    border-radius: 70px;
+    height: 110px;
+    width: 300px;   
+    position: static;
+    margin-top: 37px;
+    border: 8px #52C0A4 solid;
+    background-color: transparent;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 1.2em; 
+    color: white;
+    text-transform: uppercase;
+
+    z-index: 3;
+}
+
+/* Tekst under billede */
+p, .graphicTekst { 
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 1em; 
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 140%;
+}
+
+/* Alle overskrifter på hver af de fire sider */
+h2 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 3em; 
+    background: -webkit-linear-gradient(#80EFD1, #29957B); /* Vi laver en linear gradient, som går fra lys grøn til mørk grøn top mod bund */
+    background-clip: text; /* Gradienten vil kun blive vist inde i bogstaverne */
+    -webkit-text-fill-color: transparent; /* Vi gør selve teksten transparent, så gradient-baggrunden kun bliver synlig i bogstaverne */
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Style til "hjem/tilbage" knap */
+a {
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+}
+  
+#hjem-knap {
+    z-index: 100;
+    top: 50px; 
+    left: 50px;
+    position: absolute; 
+    
+    border: 4px #29957B solid;
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+/*--------------------------------------------
+-                                            -
+-             HJERTETS ANATOMI               -
+-                                            -
+---------------------------------------------*/
+
+.anatomiHjerte {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative; 
+    z-index: 30;
+}
+
+.tekstBokse {
+    position: absolute; /* Ændr til position: absolute; for at lægge den oven på .anatomiHjerte */
+    top: 160px; /* Placer .tekstBokse øverst i forhold til .anatomiHjerte */
+    left: 0; /* Placer .tekstBokse helt til venstre i forhold til .anatomiHjerte */
+    right: 0; /* Stræk til højre kant af siden */
+    bottom: 0; /* Stræk til bunden af siden */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 40px;
+}
+
+.tekstBokse2 {
+    display: flex;
+    justify-content: space-around;
+    z-index: 40;
+}
+
+.tekstBokse2 div{
+    height: 170px;
+    width: 170px;
+    padding: 10px;
+    border: solid #80EFD1 8px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Alle bokse bliver gennemsigtige, men er der stadig */
+    opacity:0;
+
+    /* Animationene sættes op med længde og sådan at den stopper ved 'to' */
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+/*--------------------------------------------
+-                                            -
+-       HJERTE-KAR-SYGDOMME I DANMARK        -
+-                                            -
+---------------------------------------------*/
+
+.infoGraphic {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    align-items: center;
+    height: 80vh; /* Sæt højden til 100% af viewportens højde */
+}
+
+/* ------------------------------------ FORLOOP -------------------------- */
+/*.infoGraphicBokse div {
+    
+    /* Alle bokse bliver gennemsigtige, men er der stadig */
+  /* opacity:0;
+
+    /* Animationene sættes op med længde og sådan at den stopper ved 'to' */
+  /* animation-duration:1s;
+  /* animation-fill-mode: forwards;
+}
+
+/* ----------------------------------------------------------------------- */
+
+.infoGraphicBokse {
+    display: flex;
+    flex-direction: column;
+    width: 33.333%;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoBilleder img {
+    width: 65%;
+}
+
+.infoBilleder {
+    display: flex;
+    justify-content: center;
+}
+
+.graphicTekst {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+/*--------------------------------------------
+-                                            -
+-              MÆND VS. KVINDER              -
+-                                            -
+---------------------------------------------*/
+
+.mkOverskrift {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.mkSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 33%;
+    column-gap: 100px;
+}
+
+.mkSection img {
+    height: 70%;
+}
+
+.mkSection p {
+    width: 33.333%;
+}
+
+#mkSectioner {
+    height: 75vh; 
+}
+
+.h1mk {
+    display: flex;
+    align-items: center;
+}
+
+/*----------------------------------------------- Styling af side med videoer ---------------------------------------------- */
+
+.video-wrapper {
+    display: flex;
+    align-items: center; /* Centrerer indholdet horisontalt */
+    justify-content: space-evenly;
+    margin-top: 8%;
+}
+
+.video-container {
+    width: 45%;
+    display: flex;
+    flex-direction: column; /* Ændrer fra række til kolonne */
+    align-items: center; /* Centrerer indholdet horisontalt */
+    justify-content: center; /* Centrerer indholdet vertikalt */
+    position: relative; /* Tilføjer position relative for absolut positionering af knapper */
+}
+
+#heine-video, #operation-video {
+    width: 100%; 
+    height: auto;
+}
+
+.play-button {
+    position: absolute; /* Gør knappen absolut positioneret */
+    top: 60%; /* Placerer knappen 50% fra toppen af video-container */
+    left: 50%; /* Placerer knappen 50% fra venstre side af video-container */
+    transform: translate(-50%, -50%); /* Centrerer knappen i forhold til video-container */
+    background-color: black;
+    border: 4px #29957B solid;
+    color: white;
+    font-size: 1em;
+    padding: 12px 24px; 
+    border-radius: 24px;
+    z-index: 10;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+}
+
+.video-progress-bar {
+    width: 100%;
+    display: none;
+    z-index: 100;
+    position: absolute; /* Positionerer progress baren i bunden af videoen */
+    bottom: 0;
+    height: 10px; /* Sætter en bestemt højde for progress baren */
+    background-color: black; /* Baggrundsfarve for den ufærdige del af progress baren */
+}
+  
+.video-progress-bar::-webkit-progress-bar {
+    background-color: black; /* Baggrundsfarve for den ufærdige del af progress baren i Chrome og Safari */
+}
+  
+.video-progress-bar::-webkit-progress-value {
+    background-color: #29957B; /* Farve for den fyldte del af progress baren i Chrome og Safari */
+}
+
+.luk-fullscreen-button {
+    border: 4px #29957B solid;
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+    font-size: 25pt;
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    font-family: "Montserrat", sans-serif;
+
+    z-index: 100;
+    top: 10px; 
+    right: 10px;
+    position: absolute; 
+    display: none;
+}
+
+
+#quiz {
+    top: 300px;
+    left: 600px;
+    font-size: 2.2em;
+    background-color: #811f25;
+}
+
+.quiz-wrapper {
+    height: 90vh;
+}
